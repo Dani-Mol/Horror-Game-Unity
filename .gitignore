@@ -1,0 +1,33 @@
+# Unity generated folders
+[Ll]ibrary/
+[Tt]emp/
+[Bb]uild/
+[Bb]uilds/
+Obj/
+Logs/
+UserSettings/
+
+# Package cache inside Library (opcional, porque Library/ ya lo ignora)
+Library/PackageCache/
+
+# Visual Studio / Rider / MonoDevelop project files
+*.csproj
+*.unityproj
+*.sln
+*.user
+*.pidb
+*.booproj
+
+# Unity generated files
+*.unitypackage
+*.apk
+*.obb
+
+# OS generated files
+.DS_Store
+
+# Crash logs
+mono_crash.*
+
+# Others
+*.log
