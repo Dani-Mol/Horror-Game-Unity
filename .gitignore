@@ -7,8 +7,9 @@ Obj/
 Logs/
 UserSettings/
 
-# Package cache inside Library (opcional, porque Library/ ya lo ignora)
-Library/PackageCache/
+# Assets demasiado pesados (no versionar)
+Assets/Flooded_Grounds/Content/Textures/
+Assets/Flooded_Grounds/Content/Trees/SrcTextures/
 
 # Visual Studio / Rider / MonoDevelop project files
 *.csproj
