@@ -17,13 +17,21 @@ public class AI : MonoBehaviour
 
     [Header("Steering")]
     public float patrolSpeed;
+    public float chaseSpeed;
+    public float maxTimeChasing;
+    public float radiusHit;
+    public LayerMask targetMask;
+    bool isHit;
+
 
     [Header("Transform")]
     public Transform[] patrolPoint;
     public NavMeshAgent agent;
+    public Transform currentTarget;
 
     Vector3 destination;
     int indexPatrolPoint;
+    float currentTimeChasing;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +54,7 @@ public class AI : MonoBehaviour
                 Patroling();
                 break;
             case MoveMode.chase:
+                Chasing();
 
                 break;
 
@@ -64,6 +73,30 @@ public class AI : MonoBehaviour
         {
             indexPatrolPoint = Random.Range(0, patrolPoint.Length);
             Debug.Log("Change patrol to " + indexPatrolPoint.ToString());
+        }
+    }
+
+    void Chasing()
+    {
+        agent.speed = chaseSpeed;
+        agent.destination = currentTarget.position;
+
+        Collider[] col = Physics.OverlapSphere(transform.position, radiusHit, targetMask, QueryTriggerInteraction.Ignore);
+
+        if (col.Length > 0 && !isHit)
+        {
+            Debug.Log("Juego terminado/bajar vida");
+            isHit = true;
+        }
+
+        if (currentTimeChasing > maxTimeChasing)
+        {
+            moveMode = MoveMode.patrol;
+            currentTimeChasing = 0;
+        }
+        else
+        {
+            currentTimeChasing += Time.deltaTime;
         }
     }
 }
