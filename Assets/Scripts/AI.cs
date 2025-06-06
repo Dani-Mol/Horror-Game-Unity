@@ -76,8 +76,12 @@ public class AI : MonoBehaviour
 
         animator.SetBool("chase", moveMode == MoveMode.chase);
     }
+
+
     void FieldOfView()
     {
+        isDetectTarget = false;
+
         Collider[] range = Physics.OverlapSphere(transform.position, viewRadius, targetMask, QueryTriggerInteraction.Ignore);
 
         if (range.Length > 0)
@@ -99,25 +103,15 @@ public class AI : MonoBehaviour
                         SwitchMoveMode(MoveMode.chase);
                     }
                 }
-                else
-                {
-                    isDetectTarget = false;
-                }
             }
-            else
-            {
-                isDetectTarget = false;
-            }
-        }
-        else
-        {
-            isDetectTarget = false;
         }
     }
 
+
     void Patroling()
     {
-        agent.speed = patrolSpeed;
+        if (agent.speed != patrolSpeed)
+            agent.speed = patrolSpeed;
 
         if (agent.remainingDistance < agent.stoppingDistance)
         {
@@ -161,31 +155,31 @@ public class AI : MonoBehaviour
         }
     }
 
+    int GetRandomPatrolIndexExcept(int exclude)
+    {
+        if (patrolPoint.Length <= 1) return 0;
+
+        List<int> indices = new List<int>();
+        for (int i = 0; i < patrolPoint.Length; i++)
+        {
+            if (i != exclude)
+                indices.Add(i);
+        }
+
+        return indices[Random.Range(0, indices.Count)];
+    }
+
+
+
     void SwitchMoveMode(MoveMode moveMode1)
     {
         switch (moveMode1)
         {
             case MoveMode.patrol:
-                int lastIndex = indexPatrolPoint;
-                int newIndex = Random.Range(0, patrolPoint.Length);
-
-                if (lastIndex == newIndex)
-                {
-                    newIndex = Random.Range(0, patrolPoint.Length);
-                    Debug.Log("Recalculando punto de patrullaje");
-                    return;
-                }
-
-                indexPatrolPoint = newIndex;
-                if (isHearingSound)
-                    destination = soundPositionHeared;
-                else
-                    destination = patrolPoint[indexPatrolPoint].position;
-
+                indexPatrolPoint = GetRandomPatrolIndexExcept(indexPatrolPoint);
+                destination = isHearingSound ? soundPositionHeared : patrolPoint[indexPatrolPoint].position;
                 agent.destination = destination;
-
                 Debug.Log("Cambiando punto de patrullaje a: " + indexPatrolPoint.ToString());
-
                 break;
 
             case MoveMode.chase:
