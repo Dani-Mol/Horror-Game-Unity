@@ -121,7 +121,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: cc5d7ddff36e1442f80e3a56d5a61107, type: 2}
 --- !u!1 &176719534
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,6 +557,10 @@ PrefabInstance:
     - target: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Name
       value: PlayerCapsule
+      objectReference: {fileID: 0}
+    - target: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8616685848737228382, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_SkinWidth
@@ -1022,7 +1026,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c7bc2a1ba5483e4cb136e35086930ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c7bc2a1ba5483e4cb136e35086930ec, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1055,6 +1059,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0c7bc2a1ba5483e4cb136e35086930ec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8327460799285937915, guid: 0c7bc2a1ba5483e4cb136e35086930ec, type: 3}
+      propertyPath: m_Name
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: -2321174643666020168, guid: 0c7bc2a1ba5483e4cb136e35086930ec, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1127,14 +1135,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14b0df3b1585849f4a86d448a73c7e9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveMode: 0
-  patrolSpeed: 5
+  moveMode: 1
+  patrolSpeed: 3
+  chaseSpeed: 4
+  maxTimeChasing: 10
+  maxTimeWaiting: 3
+  radiusHit: 1
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 64
   patrolPoint:
   - {fileID: 955765467}
   - {fileID: 784050039}
   - {fileID: 176719538}
   - {fileID: 732796271}
   agent: {fileID: 2134249073}
+  currentTarget: {fileID: 1133519910}
 --- !u!195 &2134249073
 NavMeshAgent:
   m_ObjectHideFlags: 0
