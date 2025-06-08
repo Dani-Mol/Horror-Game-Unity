@@ -5109,7 +5109,7 @@ MonoBehaviour:
   credits: {fileID: 1234743135}
   difficulty: {fileID: 817997552}
   loading: {fileID: 58063104}
-  gameSceneName: Scene 0
+  gameSceneName: Scene 1
 --- !u!114 &1596265649
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -45,7 +45,7 @@ public class MainMenu : MonoBehaviour
         PlayerPrefs.Save();
         difficulty.SetActive(false);
         loading.SetActive(true);
-        SceneManager.LoadScene("Scene 0");
+        SceneManager.LoadScene("Scene 1");
     }
 
     public void Medium()
@@ -54,7 +54,7 @@ public class MainMenu : MonoBehaviour
         PlayerPrefs.Save();
         difficulty.SetActive(false);
         loading.SetActive(true);
-        SceneManager.LoadScene("Scene 0");
+        SceneManager.LoadScene("Scene 1");
     }
 
     public void Easy()
@@ -63,7 +63,7 @@ public class MainMenu : MonoBehaviour
         PlayerPrefs.Save();
         difficulty.SetActive(false);
         loading.SetActive(true);
-        SceneManager.LoadScene("Scene 0");
+        SceneManager.LoadScene("Scene 1");
     }
 
 }

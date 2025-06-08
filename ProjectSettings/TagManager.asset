@@ -7,6 +7,7 @@ TagManager:
   - CinemachineTarget
   - Grass
   - Concrete
+  - Wood
   layers:
   - Default
   - TransparentFX

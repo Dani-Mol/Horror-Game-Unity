@@ -22,6 +22,7 @@ public class AI : MonoBehaviour
     public float maxTimeChasing;
     public float maxTimeWaiting;
     public float radiusHit;
+    
 
 
     [Header("Field Of View")]
@@ -37,6 +38,9 @@ public class AI : MonoBehaviour
 
     Vector3 destination, soundPositionHeared;
     int indexPatrolPoint;
+
+    int lastPatrolPoint = -1;
+
     float currentTimeChasing, currentTimeWaiting;
     bool isDetectTarget, isHearingSound;
 
@@ -113,10 +117,10 @@ public class AI : MonoBehaviour
         if (agent.speed != patrolSpeed)
             agent.speed = patrolSpeed;
 
-        if (agent.remainingDistance < agent.stoppingDistance)
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance && agent.velocity.magnitude < 0.1f)
         {
-            SwitchMoveMode(MoveMode.wait);
-            isHearingSound = false;
+        SwitchMoveMode(MoveMode.wait);
+        isHearingSound = false;
         }
     }
 
@@ -155,19 +159,20 @@ public class AI : MonoBehaviour
         }
     }
 
-    int GetRandomPatrolIndexExcept(int exclude)
+    int GetRandomPatrolIndexExcept(int current, int previous)
     {
-        if (patrolPoint.Length <= 1) return 0;
+        if (patrolPoint.Length <= 2) return (current + 1) % patrolPoint.Length; // Solo hay 2 puntos, elige el otro
 
         List<int> indices = new List<int>();
         for (int i = 0; i < patrolPoint.Length; i++)
         {
-            if (i != exclude)
+            if (i != current && i != previous)
                 indices.Add(i);
-        }
+        }   
 
         return indices[Random.Range(0, indices.Count)];
     }
+
 
 
 
@@ -176,7 +181,9 @@ public class AI : MonoBehaviour
         switch (moveMode1)
         {
             case MoveMode.patrol:
-                indexPatrolPoint = GetRandomPatrolIndexExcept(indexPatrolPoint);
+                int newIndex = GetRandomPatrolIndexExcept(indexPatrolPoint, lastPatrolPoint);
+                lastPatrolPoint = indexPatrolPoint;
+                indexPatrolPoint = newIndex;
                 destination = isHearingSound ? soundPositionHeared : patrolPoint[indexPatrolPoint].position;
                 agent.destination = destination;
                 Debug.Log("Cambiando punto de patrullaje a: " + indexPatrolPoint.ToString());

@@ -6,6 +6,8 @@ public class FootStepsSound : MonoBehaviour
     public AudioSource grassFoot1, grassFoot2;
     public AudioSource concreteFoot1, concreteFoot2;
 
+    public AudioSource woodFoot1, woodFoot2;
+
     public float stepRate = 0.5f; // tiempo entre pasos
     private bool stepToggle = false;
 
@@ -15,7 +17,12 @@ public class FootStepsSound : MonoBehaviour
     void Update()
     {
         bool isMoving = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) ||
-                        Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
+                        Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) ||
+                        Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) ||
+                        Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow); 
+
+
+                        
 
         if (isMoving && footstepCoroutine == null)
         {
@@ -48,6 +55,13 @@ public class FootStepsSound : MonoBehaviour
                 else
                     concreteFoot2.Play();
             }
+            else if (currentSurface == "Wood")
+            {
+                if (stepToggle)
+                    woodFoot1.Play();
+                else
+                    woodFoot2.Play();
+            }
 
             stepToggle = !stepToggle;
             yield return new WaitForSeconds(stepRate);
@@ -66,6 +80,10 @@ public class FootStepsSound : MonoBehaviour
             else if (hit.collider.CompareTag("Concrete"))
             {
                 currentSurface = "Concrete";
+            }
+            else if (hit.collider.CompareTag("Wood"))
+            {
+                currentSurface = "Wood";
             }
         }
     }
