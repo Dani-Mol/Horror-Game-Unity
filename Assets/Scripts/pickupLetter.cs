@@ -7,7 +7,9 @@ public class pickupLetter : MonoBehaviour
 {
     public GameObject collectTextObj, intText;
     public AudioSource pickupSound;
-    public AudioSource[] ambianceLayers; 
+    public AudioSource[] ambianceLayers;
+
+    public GameObject victoryScreen;  
 
     public bool interactable;
     public static int pagesCollected;
@@ -48,6 +50,15 @@ public class pickupLetter : MonoBehaviour
             intText.SetActive(false);
             this.gameObject.SetActive(false);
             interactable = false;
+
+             if (pagesCollected == 8)
+            {
+                if (victoryScreen != null)
+                {
+                    victoryScreen.SetActive(true);
+                    Time.timeScale = 0f; // Pausa el juego
+                }
+            }
         }
     }
 }

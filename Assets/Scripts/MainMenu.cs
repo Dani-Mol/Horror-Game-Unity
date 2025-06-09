@@ -43,6 +43,7 @@ public class MainMenu : MonoBehaviour
     {
         PlayerPrefs.SetInt("difficulty", 0);
         PlayerPrefs.Save();
+        pickupLetter.pagesCollected = 0;
         difficulty.SetActive(false);
         loading.SetActive(true);
         SceneManager.LoadScene("Scene 1");
@@ -52,6 +53,7 @@ public class MainMenu : MonoBehaviour
     {
         PlayerPrefs.SetInt("difficulty", 1);
         PlayerPrefs.Save();
+        pickupLetter.pagesCollected = 0;
         difficulty.SetActive(false);
         loading.SetActive(true);
         SceneManager.LoadScene("Scene 1");
@@ -61,6 +63,7 @@ public class MainMenu : MonoBehaviour
     {
         PlayerPrefs.SetInt("difficulty", 2);
         PlayerPrefs.Save();
+        pickupLetter.pagesCollected = 0;
         difficulty.SetActive(false);
         loading.SetActive(true);
         SceneManager.LoadScene("Scene 1");
