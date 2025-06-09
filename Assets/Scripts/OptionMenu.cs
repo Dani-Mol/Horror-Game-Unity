@@ -14,11 +14,11 @@ public class OptionMenu : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("gameLaunched"))
         {
-            PlayerPrefs.SetInt("graphics", 3); // 3 = Very High, o el valor correcto
+            PlayerPrefs.SetInt("graphics", 3); 
             PlayerPrefs.SetInt("screenResolution", 0);
             PlayerPrefs.SetFloat("masterVolume", 1);
-            PlayerPrefs.SetFloat("fieldOfView", 60); // Como dijiste antes
-            PlayerPrefs.SetInt("gameLaunched", 1); // ✅ Esto indica que ya se inicializó
+            PlayerPrefs.SetFloat("fieldOfView", 60); 
+            PlayerPrefs.SetInt("gameLaunched", 1); 
             PlayerPrefs.Save();
         }
         if (PlayerPrefs.HasKey("gameLaunched"))

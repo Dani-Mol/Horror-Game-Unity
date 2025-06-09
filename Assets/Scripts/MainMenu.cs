@@ -8,6 +8,14 @@ public class MainMenu : MonoBehaviour
     public GameObject menu, options, credits, difficulty, loading;
     public string gameSceneName;
 
+    public AudioSource menuMusic;
+
+    void Start()
+    {   
+            menuMusic.Play();
+    }
+
+
     public void openOptions()
     {
         menu.SetActive(false);
@@ -41,6 +49,9 @@ public class MainMenu : MonoBehaviour
 
     public void Hard()
     {
+        Time.timeScale = 1f;  
+        AudioListener.pause = false;  
+        if (menuMusic.isPlaying) menuMusic.Stop();
         PlayerPrefs.SetInt("difficulty", 0);
         PlayerPrefs.Save();
         pickupLetter.pagesCollected = 0;
@@ -50,23 +61,29 @@ public class MainMenu : MonoBehaviour
     }
 
     public void Medium()
-    {
+    {   
+        Time.timeScale = 1f;
+        AudioListener.pause = false;
+        if (menuMusic.isPlaying) menuMusic.Stop();
         PlayerPrefs.SetInt("difficulty", 1);
         PlayerPrefs.Save();
         pickupLetter.pagesCollected = 0;
         difficulty.SetActive(false);
         loading.SetActive(true);
-        SceneManager.LoadScene("Scene 1");
+        SceneManager.LoadScene("Scene 2");
     }
 
     public void Easy()
-    {
+    {   
+        Time.timeScale = 1f;
+        AudioListener.pause = false;
+        if (menuMusic.isPlaying) menuMusic.Stop();
         PlayerPrefs.SetInt("difficulty", 2);
         PlayerPrefs.Save();
         pickupLetter.pagesCollected = 0;
         difficulty.SetActive(false);
         loading.SetActive(true);
-        SceneManager.LoadScene("Scene 1");
+        SceneManager.LoadScene("Scene 3");
     }
 
 }

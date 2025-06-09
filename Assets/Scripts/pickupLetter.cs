@@ -56,7 +56,11 @@ public class pickupLetter : MonoBehaviour
                 if (victoryScreen != null)
                 {
                     victoryScreen.SetActive(true);
-                    Time.timeScale = 0f; // Pausa el juego
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
+                    AudioListener.pause = true;
+                    pickupLetter.pagesCollected = 0;
+                    Time.timeScale = 0f;
                 }
             }
         }
